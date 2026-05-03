@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MRST Fashion</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<marquee class=" fast" direction=" "> 📢 অর্ডার করতে WhatsApp করুন এখনই!01605019908 </marquee>
+<header>MRST Fashion Store</header>
+
+<nav >
+<a href="home.html">Home</a>
+<a href="prodcuts.html">Products</a>
+<a href="special market.html">special market</a>
+<a href="about.html"> about</a>
+<a href="style.html">STYLE PANT</a>
+<a href="genji.html"> GENJI STYLE</a>
+</nav>
+<!-- BANNER SLIDER -->
+<div class="slider">
+  <div class="slides" id="slides">
+
+    <div class="slide">
+      <img src="img/banner1.png.jpeg">
+    </div>
+
+    <div class="slide">
+      <img src="img/banar6.jpg">
+    </div>
+
+    <div class="slide">
+      <img src="img/banner2.png.jpeg">
+    </div>
+    <div class="slide">
+      <img src="img/banner3.png.jpeg">
+    </div>
+    <div class="slide">
+      <img src="img/2.jpg.jpeg">
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-box">
+<input type="text" id="search" placeholder="🔍 Search products..." onkeyup="searchProduct()">
+</div>
+
+<div class="main">
+
+<!-- LEFT CATEGORY -->
+<div class="sidebar">
+<h3>Categories</h3>
+<button onclick="filterCat('all')">All</button>
+<button onclick="filterCat('shoe')">Shoe</button>
+<button onclick="filterCat('shirt')">Shirt</button>
+<button onclick="filterCat('pant')">Pant</button>
+<button onclick="filterCat('watch')">Watch</button>
+</div>
+
+<!-- PRODUCTS -->
+<div class="products" id="products"></div>
+
+<!-- CART + FORM -->
+<div class="cart">
+<h3>Cart</h3>
+<div id="cartItems"></div>
+<h4>Total: ৳ <span id="total">0</span></h4>
+
+<h3>Customer Details</h3>
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="gmail" placeholder="Gmail">
+<input id="division" placeholder="Division">
+<input id="district" placeholder="District">
+<input id="thana" placeholder="Thana">
+<input id="union" placeholder="Union">
+<input id="village" placeholder="Village">
+<input id="size" placeholder="Size">
+
+<button onclick="order()">Order WhatsApp</button>
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-box">
+<div id="thumbs"></div>
+<div>
+<img id="mainImg">
+<h3 id="pName"></h3>
+<p id="pPrice"></p>
+<button onclick="addCart()">Add to Cart</button>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+</div>
+
+<script src="script.js"></script>
+
+<hr>
+<br>
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- LEFT COLUMN (ABOUT) -->
+    <div class="footer-box">
+      <h2>About Me</h2>
+      <p>
+      আমরা মানসম্মত ফ্যাশন পণ্য সাশ্রয়ী দামে এবং দ্রুত ডেলিভারির মাধ্যমে প্রদান করি। 
+      আমাদের সাথে থাকুন এবং উপভোগ করুন সহজ ও নির্ভরযোগ্য অনলাইন শপিং অভিজ্ঞতা।
+      </p>
+    </div>
+
+    <!-- RIGHT COLUMN (ADDRESS) -->
+    <div class="footer-box">
+      <h2>Contact Info</h2>
+
+      <p><b>📍 Address:</b> machpara,pangsha,Rajbari,Dhaka,bangladesh</p>
+      <p><b>🏠 Area:</b> mrst tuhin mahamud</p>
+      <p><b>📞 Phone,WhatsApp:</b> +8801605019908</p>
+      <p><b>✉️ Email:</b> mrstfashion@gmail.com</p>
+    </div>
+
+  </div>
+
+  <div class="bottom">
+    © 2026 TUHIN MAHAMUD | All Rights Reserved
+  </div>
+
+</footer>
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRST Fashion PANT STORE</title>
+<style>
+body{font-family:Arial;margin:0;background:#b5bbc4}
+header{background:#837474;color:#5bdf0f;text-align:center;padding:10px;font-size:30px;}
+.container{width:95%;margin:auto}
+
+.search-box{margin-top:10px}
+.search-box input{width:100%;padding:10px;border-radius:6px;border:1px solid #ccc}
+
+.main{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-top:15px}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:30px}
+.card{background:#6f9197;padding:10px;border-radius:10px;text-align:center;box-shadow:0 2px 6px rgba(110, 101, 101, 0.1);cursor:pointer}
+.card img{width:100%;height:200px;object-fit:cover}
+.price{color:#e53935;font-weight:bold}
+
+.cart{background:#1dd0d6;padding:12px;border-radius:10px;margin-bottom:10px}
+.cart-item{display:flex;justify-content:space-between;margin:5px 0}
+.qty-btn{cursor:pointer;padding:3px 6px;background:#ddd}
+
+form{background:#6f999b;padding:12px;border-radius:10px}
+input,select{width:100%;padding:8px;margin:5px 0}
+button{background:#312d2d;color:#07c1f0;border:none;padding:10px;margin-top:8px;width:100%;cursor:pointer}
+
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center}
+.modal-box{background:#dbcfcf;padding:15px;border-radius:10px;display:flex;gap:10px}
+
+#thumbs{display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto}
+#thumbs img{width:80px;height:80px;object-fit:cover;border-radius:8px;cursor:pointer}
+#mImg{width:400px;height:400px;object-fit:cover;transition:.3s}
+#mImg:hover{transform:scale(1.3)}
+
+
+.slider{
+  width:100%;
+  height:400px;
+  margin-top:10px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.slider img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:1s;
+}
+marquee{
+    font-size: xx-large;
+}
+
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 50px 20px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1000px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.footer-box {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-box h2 {
+  color: #00d4ff;
+  margin-bottom: 15px;
+}
+
+.footer-box p {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #ddd;
+}
+.slider{
+  width:100%;
+  height:400px;
+  margin-top:10px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.slider img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:1s;
+}
+
+</style>
+</head>
+<body> <marquee>🔥 MRST Fashion Juta Store 👟 নতুন প্যান্ট কালেকশন এসেছে | স্টাইলিশ ডিজাইন | আরামদায়ক | অর্ডার করতে ইনবক্স করুন 📩</marquee>
+<header>🔥 MRST Fashion Pant Store</header>
+
+<div class="container">
+<div class="search-box">
+<input type="text" id="search" placeholder="Search products...">
+</div>
+
+<div class="slider">
+  <img id="slideImg" src="">
+</div>
+
+
+
+
+
+
+
+
+<div class="main">
+<div class="products" id="productList"></div>
+
+<div>
+<div class="cart">
+<h3>Cart</h3>
+<div id="cartItems"></div>
+<hr>
+Delivery: ৳ <span id="delivery">0</span><br>
+<strong>Total: ৳ <span id="total">0</span></strong>
+</div>
+
+<form onsubmit="sendWhatsApp(event)">
+<input id="name" placeholder="Name" required>
+<input id="phone" placeholder="Phone" required>
+<input id="email" placeholder="Email">
+<input id="division" placeholder="Division">
+<input id="district" placeholder="District">
+<input id="thana" placeholder="Thana">
+<input id="union" placeholder="Union">
+<input id="village" placeholder="Village">
+<select id="size">
+<option value="">Size</option>
+<option>S</option><option>M</option><option>L</option><option>XL</option>
+</select>
+<button>Order via WhatsApp</button>
+</form>
+</div>
+</div>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<div id="thumbs"></div>
+<div>
+<img id="mImg">
+<h3 id="mName"></h3>
+<p id="mPrice"></p>
+<button onclick="addCurrent()">Add to Cart</button>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+</div>
+
+<script>
+
+// SLIDER SYSTEM
+let slides = [
+ "https://images.unsplash.com/photo-1605518216938-7c31b7b14ad0?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cGFudHxlbnwwfHwwfHx8MA%3D%3D",
+ "https://m.media-amazon.com/images/I/818n0mH4aeL._SY625_.jpg",
+ "https://img.freepik.com/premium-photo/row-jeans-hung-plastic-hangers-store-many-jeans-are-hanging-counter-shopping-concept_542154-1305.jpg",
+ "https://images.unsplash.com/photo-1490481651871-ab68de25d43d" ,
+ "https://d2u0ktu8omkpf6.cloudfront.net/187a638dae612b4e12ccddfbcb7d47db2224f0bb8e817165.jpg" ,
+ "https://dmpnews.org/wp-content/uploads/2019/07/shutterstock_86113621.jpg" ,
+ "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTekFzl383b_FBXy4ZCrtuOnalsH7ZlZDrBQg&s" ,
+ "https://www.textileengineers.org/wp-content/uploads/2025/03/IMG-20250325-WA0019.jpg" ,
+  "https://images.unsplash.com/photo-1576995853380-18ccf5c2acce?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDMxfHx8ZW58MHx8fHx8"
+];
+
+let slideIndex = 0;
+let slideImg = document.getElementById("slideImg");
+
+function autoSlide(){
+  slideImg.src = slides[slideIndex];
+  slideIndex++;
+  if(slideIndex >= slides.length){
+    slideIndex = 0;
+  }
+}
+
+setInterval(autoSlide, 2500);
+autoSlide();
+
+
+let products=[
+
+
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+},
+{
+ name:"Sneakers Pro",
+ price:1500,
+ images:[
+  "https://e7.pngegg.com/pngimages/773/1016/png-clipart-pile-of-blue-denim-bottoms-jeans-clothing-denim-trousers-xchng-stacked-jeans-blue-textile.png",
+  "https://png.pngtree.com/png-vector/20231115/ourmid/pngtree-folded-old-blue-jeans-clothing-png-image_10594549.png",
+  "https://anabru.com.br/wp-content/uploads/2024/06/8.png",
+  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6PDeeQF4n4qOEd8r9V917QIPLlE78nUlUb3gMJph2IQ&shttps://anabru.com.br/wp-content/uploads/2024/06/8.png"
+ ]
+}
+
+
+];
+
+let cart=[],current=null;
+
+function showProducts(list=products){
+productList.innerHTML=list.map((p,i)=>`
+<div class="card" onclick="openModal(${i})">
+<img src="${p.images[0]}">
+<h4>${p.name}</h4>
+<div class="price">৳ ${p.price}</div>
+</div>`).join('');
+}
+showProducts();
+
+search.oninput=function(){
+let v=this.value.toLowerCase();
+showProducts(products.filter(p=>p.name.toLowerCase().includes(v)));
+}
+
+function openModal(i){
+let p=products[i];
+modal.style.display='flex';
+mName.innerText=p.name;
+mPrice.innerText='৳ '+p.price;
+mImg.src=p.images[0];
+current={name:p.name,price:p.price};
+thumbs.innerHTML=p.images.map(img=>`<img src="${img}" onclick="changeImage('${img}')">`).join('');
+}
+
+function changeImage(src){mImg.src=src}
+function closeModal(){modal.style.display='none'}
+
+function addCurrent(){
+let f=cart.find(i=>i.name===current.name);
+if(f)f.qty++;else cart.push({...current,qty:1});
+updateCart();closeModal();
+}
+
+function changeQty(name,type){
+let item=cart.find(i=>i.name===name);
+if(type==='inc') item.qty++;
+if(type==='dec') item.qty--;
+if(item.qty<=0) cart=cart.filter(i=>i.name!==name);
+updateCart();
+}
+
+function updateCart(){
+let total=0;
+cartItems.innerHTML=cart.map(i=>{
+let sum=i.price*i.qty; total+=sum;
+return `<div class='cart-item'>${i.name}
+<div><span class='qty-btn' onclick="changeQty('${i.name}','dec')">-</span>${i.qty}<span class='qty-btn' onclick="changeQty('${i.name}','inc')">+</span></div></div>`
+}).join('');
+delivery.innerText=cart.length?60:0;
+document.getElementById('total').innerText=total+(cart.length?60:0);
+}
+
+function sendWhatsApp(e){
+e.preventDefault();
+let n=name.value, ph=phone.value, em=email.value, div=division.value;
+let dis=district.value, th=thana.value, un=union.value, vil=village.value, sz=size.value;
+let items=cart.map(i=>`${i.name} x${i.qty}`).join('%0A');
+let total=document.getElementById('total').innerText;
+let msg=`Order:%0A${items}%0A------%0ATotal: ৳ ${total}%0AName:${n}%0APhone:${ph}%0AEmail:${em}%0ADivision:${div}%0ADistrict:${dis}%0AThana:${th}%0AUnion:${un}%0AVillage:${vil}%0ASize:${sz}`;
+window.open(`https://wa.me/8801605019908?text=${msg}`,'_blank');
+}
+</script>
+</div>
+<hr>
+<br>
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- LEFT COLUMN (ABOUT) -->
+    <div class="footer-box">
+      <h2>About Me</h2>
+      <p>
+      আমরা মানসম্মত ফ্যাশন পণ্য সাশ্রয়ী দামে এবং দ্রুত ডেলিভারির মাধ্যমে প্রদান করি। 
+      আমাদের সাথে থাকুন এবং উপভোগ করুন সহজ ও নির্ভরযোগ্য অনলাইন শপিং অভিজ্ঞতা।
+      </p>
+    </div>
+
+    <!-- RIGHT COLUMN (ADDRESS) -->
+    <div class="footer-box">
+      <h2>Contact Info</h2>
+
+      <p><b>📍 Address:</b> machpara,pangsha,Rajbari,Dhaka,bangladesh</p>
+      <p><b>🏠 Area:</b> mrst tuhin mahamud</p>
+      <p><b>📞 Phone,whatup:</b> +8801605019908</p>
+      <p><b>✉️ Email:</b> mrstfashion@gmail.com</p>
+    </div>
+
+  </div>
+
+  <div class="bottom">
+    © 2026 TUHIN MAHAMUD | All Rights Reserved
+  </div>
+
+</footer>
+
+</body>
+</html>

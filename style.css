@@ -1,0 +1,245 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#5c707c;
+color:#111;
+}
+
+
+.fast {
+    direction: right;
+    height: 50px;
+    color: #0e0f0d;
+    font-size: 40px;
+    background-color: rgb(11, 223, 187);
+}
+.fastone{
+   direction: right;
+    height: 50px;
+    color: #0a1a06;
+    font-size: 40px;
+    background-color: rgb(116, 219, 211);
+
+}
+
+header{
+background:#111;
+color:#fff;
+padding:15px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+/* Menu */
+nav{
+background:#05bebe;
+text-align:center;
+padding:10px;
+}
+
+nav a{
+color:rgb(243, 231, 231);
+margin:0 20px;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+text-decoration:underline;
+}
+
+/* Banner Slider */
+.slider {
+  width: 100%;
+  height: 400px; /* FULL IMAGE dekhanor jonno */
+  overflow: hidden;
+}
+
+.slides {
+  display: flex;
+  transition: 0.8s;
+}
+
+.slide {
+  min-width: 70%;
+}
+
+.slide img {
+  width: 100%;
+  height: 400px;   /* IMAGE CUT hobe na */
+  object-fit: contain; /* FULL show korbe */
+}
+
+
+
+.search-box{text-align:center;padding:10px}
+.search-box input{
+ width:90%;
+ padding:12px;
+ border-radius:25px;
+ border:1px solid #ccc;
+ font-size:16px
+}
+
+.main{
+ display:grid;
+ grid-template-columns:1fr 2fr 1fr;
+ gap:15px;
+ padding:10px
+}
+
+.sidebar,.cart{
+ background: rgb(124, 199, 158);
+ padding:10px;
+ border-radius:10px
+}
+
+.sidebar button{
+ display:block;
+ width:100%;
+ margin:5px 0;
+ padding:8px
+}
+button{   background: #05bebe;}
+
+.products{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+ gap:15px
+}
+
+.card{
+ background:#aaa2a2;
+ border-radius:12px;
+ padding:10px;
+ text-align:center;
+ position:relative
+}
+
+.card img{
+ width:100%;
+ height:150px;
+ object-fit:cover;
+ border-radius:10px
+}
+
+.price{color:rgb(19, 17, 17);font-weight:bold}
+
+.add-btn{
+ background:#f0c0c0;
+ color:#1a1b18;
+ padding:10px;
+ border:none;
+ margin-top:10px
+}
+
+.badge{
+ position:absolute;
+ top:5px;
+ left:5px;
+ background:rgb(235, 22, 22);
+ color:#fff;
+ padding:3px 6px;
+ font-size:12px
+}
+
+.modal{
+ position:fixed;
+ top:0;left:0;
+ width:100%;height:100%;
+ background:rgba(0,0,0,0.7);
+ display:none;
+ justify-content:center;
+ align-items:center
+}
+
+.modal-box{
+ background:#8facc0;
+ padding:15px;
+ border-radius:15px;
+ display:flex;
+ gap:10px
+}
+
+#thumbs img{
+ width:50px;
+ height:80px;
+ margin:5px;
+ cursor:pointer
+}
+
+#mainImg{
+ width:300px;
+ height:300px;
+ object-fit:cover
+}
+
+input{
+ width:100%;
+ padding:8px;
+ margin:5px 0
+}
+
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 50px 20px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1000px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.footer-box {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-box h2 {
+  color: #00d4ff;
+  margin-bottom: 15px;
+}
+
+.footer-box p {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #ddd;
+}
+.slider{
+  width:100%;
+  height:400px;
+  margin-top:10px;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.slider img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:1s;
+}
+
+
+
+@media(max-width:950px){
+.container{
+grid-template-columns:1fr;
+}
+}
+
+
+
+
+
