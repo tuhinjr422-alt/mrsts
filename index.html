@@ -8,39 +8,42 @@
 </head>
 <body>
 <marquee class=" fast" direction=" "> 📢 অর্ডার করতে WhatsApp করুন এখনই!01605019908 </marquee>
-<header>MRST Fashion store style 🏬 </header>
+<header>MRST Fashion Store</header>
 
-<nav >
-<a href="home.html">Home</a>
+<nav  class="navbar">
+<a href="home.html" class="active>Home</a>
 <a href="prodcuts.html">Products</a>
 <a href="special market.html">special market</a>
 <a href="about.html"> about</a>
 <a href="style.html">STYLE PANT</a>
 <a href="genji.html"> GENJI STYLE</a>
+<a href="Photograph.html"> Photograph</a>
 </nav>
 <!-- BANNER SLIDER -->
-<div class="slider">
-  <div class="slides" id="slides">
+<!-- Simple Slider (No CSS needed extra) -->
 
-    <div class="slide">
-      <img src="img/banner1.png.jpeg">
-    </div>
-
-    <div class="slide">
-      <img src="img/banar6.jpg">
-    </div>
-
-    <div class="slide">
-      <img src="img/banner2.png.jpeg">
-    </div>
-    <div class="slide">
-      <img src="img/banner3.png.jpeg">
-    </div>
-    <div class="slide">
-      <img src="img/2.jpg.jpeg">
-    </div>
-  </div>
+<div>
+  <img id="slider" src="img/cover1.jpg" width="100%">
 </div>
+
+<script>
+let images = [
+  "img/cover1.jpg",
+  "img/cover2.jpg",
+  "img/cover3.jpg",
+  "img/cover4.jpg"
+];
+
+let i = 0;
+
+setInterval(()=>{
+  i++;
+  if(i >= images.length){
+    i = 0;
+  }
+  document.getElementById("slider").src = images[i];
+}, 3000);
+</script>
 
 <!-- SEARCH -->
 <div class="search-box">
@@ -56,12 +59,15 @@
 <button onclick="filterCat('shoe')">Shoe</button>
 <button onclick="filterCat('shirt')">Shirt</button>
 <button onclick="filterCat('pant')">Pant</button>
+
+<button onclick="filterCat('bag')">Bag</button>
+<button onclick="filterCat('sunglass')">Sunglasses</button>
 <button onclick="filterCat('watch')">Watch</button>
+<button onclick="filterCat('ghori')">ghori</button>
 </div>
 
 <!-- PRODUCTS -->
 <div class="products" id="products"></div>
-
 <!-- CART + FORM -->
 <div class="cart">
 <h3>Cart</h3>
@@ -92,13 +98,14 @@
 <img id="mainImg">
 <h3 id="pName"></h3>
 <p id="pPrice"></p>
-<button onclick="addCart()">Add to Cart</button>
+<button onclick="addToCart()">Add to Cart</button>
 <button onclick="closeModal()">Close</button>
+
 </div>
 </div>
 </div>
 
-<script src="script.js"></script>
+
 
 <hr>
 <br>
@@ -132,5 +139,6 @@
   </div>
 
 </footer>
+<script src="script.js"></script>
 </body>
 </html>
