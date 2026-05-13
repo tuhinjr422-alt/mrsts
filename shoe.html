@@ -2,27 +2,567 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>MRST Fashion</title>
-<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MRST Fashion Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f5f5;
+padding-bottom:100px;
+}
+
+/* ===== NAVBAR ===== */
+
+.navbar{
+position:sticky;
+top:0;
+z-index:999;
+background:#fff;
+padding:12px 20px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.logo{
+font-size:28px;
+font-weight:700;
+color:#ff6600;
+}
+
+.search{
+width:50%;
+display:flex;
+background:#f5f5f5;
+border-radius:40px;
+overflow:hidden;
+}
+
+.search input{
+flex:1;
+padding:14px;
+border:none;
+outline:none;
+background:none;
+}
+
+.search button{
+padding:14px 20px;
+border:none;
+background:#ff6600;
+color:#fff;
+font-size:18px;
+cursor:pointer;
+}
+
+.icons{
+display:flex;
+gap:20px;
+font-size:25px;
+}
+
+.icons div{
+cursor:pointer;
+position:relative;
+}
+
+#cartCount{
+position:absolute;
+top:-8px;
+right:-10px;
+background:red;
+color:#fff;
+padding:2px 7px;
+border-radius:50%;
+font-size:12px;
+}
+
+/* ===== SLIDER ===== */
+
+.slider{
+margin:15px;
+border-radius:25px;
+overflow:hidden;
+}
+
+.slider img{
+width:100%;
+height:400px;
+object-fit:cover;
+border-radius:10px;
+transition:0.5s;
+}
+
+/* ===== OFFER ===== */
+
+.offer{
+margin:15px;
+padding:18px;
+border-radius:20px;
+background:linear-gradient(45deg,#ff6600,#ff2d55);
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:#fff;
+font-size:22px;
+font-weight:700;
+}
+
+/* ===== CATEGORY ===== */
+
+.categories{
+display:flex;
+gap:12px;
+overflow:auto;
+padding:0 15px 15px;
+}
+
+.cat{
+min-width:120px;
+padding:18px;
+background:#c57979;
+border-radius:18px;
+text-align:center;
+font-weight:600;
+box-shadow:0 3px 10px rgba(0,0,0,.08);
+cursor:pointer;
+transition:.3s;
+}
+
+.cat.active{
+background:#ff6600;
+color:#fff;
+}
+
+.cat:hover{
+transform:translateY(-5px);
+}
+
+/* ===== PRODUCTS ===== */
+
+.products{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+padding:15px;
+}
+
+.card{
+background:#fff;
+border-radius:22px;
+overflow:hidden;
+position:relative;
+transition:.3s;
+box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+
+.card:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 20px rgba(0,0,0,.12);
+}
+
+.badge{
+position:absolute;
+top:12px;
+left:12px;
+background:#ff3d00;
+color:#fff;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;
+font-weight:700;
+z-index:2;
+}
+
+.heart{
+position:absolute;
+top:12px;
+right:12px;
+width:38px;
+height:38px;
+background:#fff;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:18px;
+cursor:pointer;
+z-index:2;
+}
+
+.img-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:2px;
+}
+
+.img-grid img{
+width:100%;
+height:130px;
+object-fit:cover;
+cursor:pointer;
+transition:.3s;
+}
+
+.img-grid img:hover{
+transform:scale(1.05);
+}
+
+.info{
+padding:14px;
+}
+
+.title{
+font-size:18px;
+font-weight:700;
+margin-bottom:5px;
+}
+
+.price{
+font-size:24px;
+font-weight:700;
+color:#ff6600;
+}
+
+.rating{
+margin:8px 0;
+color:gold;
+font-size:18px;
+}
+
+.actions{
+display:flex;
+gap:10px;
+margin-top:12px;
+}
+
+.actions button{
+flex:1;
+padding:12px;
+border:none;
+border-radius:12px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.view{
+background:#eee;
+}
+
+.add{
+background:#ff6600;
+color:#fff;
+}
+
+.actions button:hover{
+transform:translateY(-2px);
+}
+
+/* ===== POPUP ===== */
+
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+
+display:none;
+justify-content:center;
+align-items:center;
+
+z-index:9999;
+overflow:auto;
+}
+.whatsapp,
+.dark-btn{
+position:fixed;
+z-index:100000;
+}
+.dark{
+background:#111;
+color:white;
+}
+
+.dark .navbar,
+.dark .popup-box,
+.dark .order-box,
+.dark .cart{
+background:#1b1b1b;
+color:white;
+}
+
+.popup-box{
+background:#729db9;
+width:85%;
+max-width:1000px;
+max-height: 90vh;
+overflow: auto;
+border-radius:25px;
+padding:20px;
+display:grid;
+grid-template-columns:1.1fr .9fr;
+gap:25px;
+position:relative;
+}
+
+/* ===== LEFT SIDE ===== */
+
+.big-img{
+width:80%;
+height:520px;
+object-fit:cover;
+border-radius:20px;
+}
+
+.small-imgs{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:10px;
+margin-top:12px;
+}
+
+.small-imgs img{
+width:100%;
+height:100px;
+object-fit:cover;
+border-radius:15px;
+cursor:pointer;
+border:2px solid transparent;
+}
+
+.small-imgs img:hover{
+border-color:#ff6600;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:18px;
+}
+
+.feature{
+background:#fafafa;
+padding:18px;
+border-radius:18px;
+text-align:center;
+}
+
+.description{
+margin-top:18px;
+background:#fafafa;
+padding:20px;
+border-radius:20px;
+line-height:32px;
+}
+
+/* ===== RIGHT SIDE ===== */
+
+.close{
+position:absolute;
+top:15px;
+right:20px;
+font-size:28px;
+cursor:pointer;
+}
+
+#pName{
+font-size:42px;
+font-weight:700;
+margin-bottom:10px;
+}
+
+.rating-big{
+font-size:22px;
+margin-bottom:15px;
+}
+
+#pPrice{
+font-size:42px;
+font-weight:700;
+color:#010f0f;
+}
+
+.delivery{
+background:#3ed8b2;
+padding:15px;
+border-radius:18px;
+line-height:35px;
+font-size:18px;
+margin-bottom:15px;
+}
+
+/* ===== ORDER FORM ===== */
+
+.order-box{
+border:2px solid #030c0b;
+padding:20px;
+border-radius:20px;
+}
+
+.order-title{
+text-align:center;
+font-size:35px;
+font-weight:700;
+color:#020f0f;
+margin-bottom:18px;
+}
+
+.order-box input,
+.order-box select,
+.order-box textarea{
+width:100%;
+padding:16px;
+border:1px solid #a14040;
+border-radius:12px;
+margin-bottom:14px;
+font-size:16px;
+outline:none;
+}
+
+.row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.order-btn{
+width:100%;
+padding:18px;
+background:#25D366;
+border:none;
+border-radius:14px;
+font-size:24px;
+font-weight:700;
+color:#fff;
+cursor:pointer;
+}
+
+/* ===== CART ===== */
+
+.cart{
+position:fixed;
+top:0;
+right:-100%;
+width:350px;
+height:100%;
+background:#9b2222;
+z-index:999999;
+padding:20px;
+transition:.4s;
+overflow:auto;
+}
+
+.cart.active{
+right:0;
+}
+
+/* ===== FLOAT BUTTON ===== */
+
+.whatsapp{
+position:fixed;
+bottom:95px;
+right:15px;
+width:60px;
+height:60px;
+border-radius:50%;
+background:#35c269;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:30px;
+color:#fff;
+text-decoration:none;
+z-index:99999;
+}
+
+.dark-btn{
+position:fixed;
+bottom:165px;
+right:15px;
+width:55px;
+height:55px;
+border-radius:50%;
+background:#111;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+color:#fff;
+cursor:pointer;
+z-index:99999;
+}
+
+/* ===== BOTTOM NAV ===== */
+
+.bottom{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+background:#fff;
+display:flex;
+justify-content:space-around;
+padding:12px 0;
+box-shadow:0 -2px 10px rgba(0,0,0,.08);
+}
+
+/* ===== MORE BTN ===== */
+
+#moreBtn{
+padding:15px 35px;
+border:none;
+background:#ff6600;
+color:#fff;
+font-size:18px;
+font-weight:700;
+border-radius:14px;
+cursor:pointer;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:900px){
+
+.products{
+grid-template-columns:repeat(2,1fr);
+}
+
+.popup-box{
+grid-template-columns:1fr;
+}
+
+.big-img{
+height:350px;
+}
+
+.search{
+width:40%;
+}
+
+
+
+
+}
+
+</style>
 </head>
 <body>
-<marquee class=" fast" direction=" "> 📢 অর্ডার করতে WhatsApp করুন এখনই!01605019908 </marquee>
-<header>MRST Fashion Store</header>
-
-<nav  class="navbar">
-<a href="home.html" class="active>Home</a>
-<a href="prodcuts.html">Products</a>
-<a href="special market.html">special market</a>
-<a href="about.html"> about</a>
-<a href="shoe.html">STYLE PANT</a>
-<a href="genji.html"> GENJI STYLE</a>
-<a href="Photograph.html"> Photograph</a>
-
-</nav>
-<!-- BANNER SLIDER -->
-<!-- Simple Slider (No CSS needed extra) -->
-
 
 <div class="navbar">
 
@@ -924,40 +1464,931 @@ class="whatsapp">
 
 </div>
 
+<script>
+
+const products = [
+
+{
+name:"Zoom Wailk",
+price:899,
+category:"shoe",
+images:[
+"imgjuta/1.jpg.jpeg",
+"imgjuta/2.jpg.jpeg",
+"imgjuta/3.jpg.jpeg",
+"imgjuta/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:500,
+category:"shoe",
+images:[
+"imgjuta/10.jpg.jpeg",
+"imgjuta/11.jpg.jpeg",
+"imgjuta/12.jpg.jpeg",
+"imgjuta/13.jpg.jpeg"
+]
+},
+
+{
+name:"Style Feet ",
+price:1120,
+category:"shoe",
+images:[
+"imgjuta/4.jpg.jpeg",
+"imgjuta/9.jpg.jpeg",
+"imgjuta/7.jpg.jpeg",
+"imgjuta/8.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"shoe",
+images:[
+"imgjuta/14.jpg.jpeg",
+"imgjuta/15.jpg.jpeg",
+"imgjuta/16.jpg.jpeg",
+"imgjuta/18.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:1199,
+category:"shoe",
+images:[
+"imgjuta/19.jpg.jpeg",
+"imgjuta/19.jpg.jpeg",
+"imgjuta/19.jpg.jpeg",
+"imgjuta/20.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1300,
+category:"shoe",
+images:[
+"imgjuta/21.jpg.jpeg",
+"imgjuta/21.jpg.jpeg",
+"imgjuta/21.jpg.jpeg",
+"imgjuta/21.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:800,
+category:"shoe",
+images:[
+"imgjuta/22.jpg.jpeg",
+"imgjuta/22.jpg.jpeg",
+"imgjuta/22.jpg.jpeg",
+"imgjuta/22.jpg.jpeg"
+
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"shoe",
+images:[
+"imgjuta/23.jpg.jpeg",
+"imgjuta/23.jpg.jpeg",
+"imgjuta/23.jpg.jpeg",
+"imgjuta/23.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/24.jpg.jpeg",
+"imgjuta/24.jpg.jpeg",
+"imgjuta/24.jpg.jpeg",
+"imgjuta/24.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"fashion",
+images:[
+"imgjuta/25.jpg.jpeg",
+"imgjuta/25.jpg.jpeg",
+"imgjuta/25.jpg.jpeg",
+"imgjuta/25.jpg.jpeg"
 
 
-<hr>
-<br>
-<footer class="footer">
+]
+},
 
-  <div class="footer-container">
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/26.jpg.jpeg",
+"imgjuta/26.jpg.jpeg",
+"imgjuta/26.jpg.jpeg",
+"imgjuta/26.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"shoe",
+images:[
+"imgjuta/27.jpg.jpeg",
+"imgjuta/27.jpg.jpeg",
+"imgjuta/27.jpg.jpeg",
+"imgjuta/27.jpg.jpeg"
+]
+},
 
-    <!-- LEFT COLUMN (ABOUT) -->
-    <div class="footer-box">
-      <h2>About Me</h2>
-      <p>
-      আমরা মানসম্মত ফ্যাশন পণ্য সাশ্রয়ী দামে এবং দ্রুত ডেলিভারির মাধ্যমে প্রদান করি। 
-      আমাদের সাথে থাকুন এবং উপভোগ করুন সহজ ও নির্ভরযোগ্য অনলাইন শপিং অভিজ্ঞতা।
-      </p>
-    </div>
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/28.jpg.jpeg",
+"imgjuta/28.jpg.jpeg",
+"imgjuta/28.jpg.jpeg",
+"imgjuta/28.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"shoe",
+images:[
+"imgjuta/29.jpg.jpeg",
+"imgjuta/29.jpg.jpeg",
+"imgjuta/29.jpg.jpeg",
+"imgjuta/29.jpg.jpeg"
+]
+},
 
-    <!-- RIGHT COLUMN (ADDRESS) -->
-    <div class="footer-box">
-      <h2>Contact Info</h2>
+{
+name:"Nike Shoe",
+price:500,
+category:"shoe",
+images:[
+"imgjuta/30.jpg.jpeg",
+"imgjuta/30.jpg.jpeg",
+"imgjuta/30.jpg.jpeg",
+"imgjuta/30.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:999,
+category:"shoe",
+images:[
+"imgjuta/31.jpg.jpeg",
+"imgjuta/31.jpg.jpeg",
+"imgjuta/31.jpg.jpeg",
+"imgjuta/31.jpg.jpeg"
+]
+},
 
-      <p><b>📍 Address:</b> machpara,pangsha,Rajbari,Dhaka,bangladesh</p>
-      <p><b>🏠 Area:</b> mrst tuhin mahamud</p>
-      <p><b>📞 Phone,WhatsApp:</b> +8801605019908</p>
-      <p><b>✉️ Email:</b> mrstfashion@gmail.com</p>
-    </div>
+{
+name:"Nike Shoe",
+price:1099,
+category:"shoe",
+images:[
+"imgjuta/32.jpg.jpeg",
+"imgjuta/32.jpg.jpeg",
+"imgjuta/32.jpg.jpeg",
+"imgjuta/32.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"shoe",
+images:[
+"imgjuta/33.jpg.jpeg",
+"imgjuta/33.jpg.jpeg",
+"imgjuta/33.jpg.jpeg",
+"imgjuta/33.jpg.jpeg"
 
-  </div>
+]
+},
 
-  <div class="bottom">
-    © 2026 TUHIN MAHAMUD | All Rights Reserved
-  </div>
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/34.jpg.jpeg",
+"imgjuta/34.jpg.jpeg",
+"imgjuta/34.jpg.jpeg",
+"imgjuta/34.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
 
-</footer>
-<script src="script.js"></script>
+]
+},
+
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/36.jpg.jpeg",
+"imgjuta/36.jpg.jpeg",
+"imgjuta/36.jpg.jpeg",
+"imgjuta/36.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:400,
+category:"shoe",
+images:[
+"imgjuta/38.jpg.jpeg",
+"imgjuta/38.jpg.jpeg",
+"imgjuta/38.jpg.jpeg",
+"imgjuta/38.jpg.jpeg"
+]
+},
+
+
+{
+name:"Leather Bag",
+price:800,
+category:"bag",
+images:[
+"img/bag/bag1.jpg",
+"img/bag/bag2.jpg",
+"img/bag/bag3.jpg",
+"img/bag/bag4.jpg"
+]
+},
+
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/39.jpg.jpeg",
+"imgjuta/39.jpg.jpeg",
+"imgjuta/39.jpg.jpeg",
+"imgjuta/39.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/40.jpg.jpeg",
+"imgjuta/40.jpg.jpeg",
+"imgjuta/40.jpg.jpeg",
+"imgjuta/40.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/41.jpg.jpeg",
+"imgjuta/41.jpg.jpeg",
+"imgjuta/41.jpg.jpeg",
+"imgjuta/41.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/42.jpg.jpeg",
+"imgjuta/42.jpg.jpeg",
+"imgjuta/42.jpg.jpeg",
+"imgjuta/42.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/43.jpg.jpeg",
+"imgjuta/43.jpg.jpeg",
+"imgjuta/43.jpg.jpeg",
+"imgjuta/43.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:200,
+category:"shoe",
+images:[
+"imgjuta/36.jpg.jpeg",
+"imgjuta/36.jpg.jpeg",
+"imgjuta/36.jpg.jpeg",
+"imgjuta/36.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:790,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/44.jpg.jpeg",
+"imgjuta/44.jpg.jpeg",
+"imgjuta/44.jpg.jpeg",
+"imgjuta/44.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:900,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:200,
+category:"shoe",
+images:[
+"imgjuta/45.jpg.jpeg",
+"imgjuta/45.jpg.jpeg",
+"imgjuta/45.jpg.jpeg",
+"imgjuta/45.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:100,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:2500,
+category:"shoe",
+images:[
+"imgjuta/46.jpg.jpeg",
+"imgjuta/46.jpg.jpeg",
+"imgjuta/46.jpg.jpeg",
+"imgjuta/46.jpg.jpeg"
+]
+},
+{
+name:"Premium Hoodie",
+price:1500,
+category:"fashion",
+images:[
+"img/1.jpg.jpeg",
+"img/2.jpg.jpeg",
+"img/3.jpg.jpeg",
+"img/4.jpg.jpeg"
+
+]
+},
+
+{
+name:"Nike Shoe",
+price:1090,
+category:" ghori",
+images:[
+"imgjuta/45.jpg.jpeg",
+"imgjuta/45.jpg.jpeg",
+"imgjuta/45.jpg.jpeg",
+"imgjuta/45.jpg.jpeg"
+]
+},
+
+
+{
+name:"Leather Bag",
+price:1800,
+category:"bag",
+images:[
+"img/bag/bag1.jpg",
+"img/bag/bag2.jpg",
+"img/bag/bag3.jpg",
+"img/bag/bag4.jpg"
+]
+}
+
+];
+
+let cart = [];
+
+let visibleProducts = 4;
+
+let currentProducts = [...products];
+
+const productsDiv =
+document.getElementById("products");
+
+function loadProducts(list=currentProducts){
+
+productsDiv.innerHTML = "";
+
+list.slice(0,visibleProducts).forEach((p,index)=>{
+
+productsDiv.innerHTML += `
+
+<div class="card">
+
+<div class="badge">HOT</div>
+
+<div class="heart">❤️</div>
+
+<div class="img-grid">
+
+<img src="${p.images[0]}">
+<img src="${p.images[1]}">
+<img src="${p.images[2]}">
+<img src="${p.images[3]}">
+
+</div>
+
+<div class="info">
+
+<div class="title">${p.name}</div>
+
+<div class="price">৳${p.price}</div>
+
+<div class="rating">⭐⭐⭐⭐⭐</div>
+
+<div class="actions">
+
+<button class="view"
+onclick="showPopup(${products.indexOf(p)})">
+View
+</button>
+
+<button class="add"
+onclick="addToCart('${p.name}',${p.price})">
+Add
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+if(visibleProducts >= list.length){
+
+document.getElementById("moreBtn").style.display = "none";
+
+}else{
+
+document.getElementById("moreBtn").style.display = "inline-block";
+
+}
+
+}
+
+loadProducts();
+
+document.getElementById("moreBtn")
+.onclick = function(){
+
+ visibleProducts += 5;
+
+loadProducts();
+
+};
+
+function filterProducts(category,event){
+
+visibleProducts = 10;
+
+document.querySelectorAll(".cat")
+.forEach(btn=>{
+
+btn.classList.remove("active");
+
+});
+
+event.target.classList.add("active");
+
+if(category === "all"){
+
+currentProducts = [...products];
+
+}else{
+
+currentProducts = products.filter(p=>
+p.category === category);
+
+}
+
+loadProducts(currentProducts);
+
+}
+
+document.getElementById("searchBox")
+.addEventListener("keyup",function(){
+
+let value = this.value.toLowerCase();
+
+currentProducts = products.filter(p=>
+
+p.name.toLowerCase().includes(value)
+
+);
+
+let visibleProducts = 10;
+
+loadProducts(currentProducts);
+
+});
+
+let currentProduct = null;
+
+function showPopup(index){
+
+currentProduct = products[index];
+
+document.getElementById("popup").style.display = "flex";
+
+document.getElementById("pName").innerText =
+currentProduct.name;
+
+document.getElementById("pPrice").innerText =
+"৳" + currentProduct.price;
+
+document.getElementById("bigImg").src =
+currentProduct.images[0];
+
+let imgs = "";
+
+currentProduct.images.forEach((img)=>{
+
+imgs += `
+<img src="${img}"
+onclick="changeImg('${img}')">
+`;
+
+});
+
+document.getElementById("smallImgs").innerHTML =
+imgs;
+
+}
+
+function changeImg(src){
+
+document.getElementById("bigImg").src = src;
+
+}
+
+function closePopup(){
+
+document.getElementById("popup").style.display = "none";
+
+}
+
+function addToCart(name,price){
+
+cart.push({name,price});
+
+updateCart();
+
+alert(name + " Added To Cart");
+
+}
+
+function updateCart(){
+
+let total = 0;
+
+let html = "";
+
+cart.forEach((item)=>{
+
+total += item.price;
+
+html += `
+
+<div style="
+background:#f5f5f5;
+padding:10px;
+margin-bottom:10px;
+border-radius:10px;
+">
+
+${item.name} - ৳${item.price}
+
+</div>
+
+`;
+
+});
+
+html += `
+<hr><br>
+<h3>Total: ৳${total}</h3>
+`;
+
+document.getElementById("cartItems").innerHTML =
+html;
+
+document.getElementById("cartCount").innerText =
+cart.length;
+
+}
+
+function openCart(){
+
+document.getElementById("cart")
+.classList.add("active");
+
+}
+
+function sendOrder(){
+
+let name =
+document.getElementById("name").value;
+
+let phone =
+document.getElementById("phone").value;
+
+let gmail =
+document.getElementById("gmail").value;
+
+let division =
+document.getElementById("division").value;
+
+let district =
+document.getElementById("district").value;
+
+let thana =
+document.getElementById("thana").value;
+
+let size =
+document.getElementById("size").value;
+
+let color =
+document.getElementById("color").value;
+
+let address =
+document.getElementById("address").value;
+
+let total = 0;
+
+let orderList = "";
+
+cart.forEach((item,i)=>{
+
+total += item.price;
+
+orderList += `
+${i+1}. ${item.name}
+৳${item.price}
+
+`;
+
+});
+
+if(cart.length===0){
+
+orderList = `
+${currentProduct.name}
+৳${currentProduct.price}
+`;
+
+total = currentProduct.price;
+
+}
+
+let msg = `
+
+🛒 NEW ORDER
+
+👤 Name: ${name}
+
+📱 Phone: ${phone}
+
+📧 Gmail: ${gmail}
+
+🏢 Division: ${division}
+
+📍 District: ${district}
+
+🏠 Thana: ${thana}
+
+📏 Size: ${size}
+
+🎨 Color: ${color}
+
+📝 Address:
+${address}
+
+================
+
+🛍 Products:
+${orderList}
+
+================
+
+💰 Total: ৳${total}
+
+`;
+
+let url =
+"https://wa.me/8801605019908?text="
++ encodeURIComponent(msg);
+
+window.open(url,"_blank");
+
+}
+
+function darkMode(){
+
+document.body.classList.toggle("dark");
+
+}
+
+let time = 8130;
+
+setInterval(()=>{
+
+let h = Math.floor(time/3600);
+
+let m = Math.floor((time%3600)/60);
+
+let s = time%60;
+
+document.getElementById("timer").innerHTML =
+`${h}:${m}:${s}`;
+
+if(time>0){
+
+time--;
+
+}
+
+},1000);
+
+function darkMode(){
+document.body.classList.toggle("dark");
+
+}
+
+let banners = [
+
+"img/cover2.jpg",
+"img/cover3.jpg",
+"img/cover4.jpg",
+"img/cover1.jpg"
+
+
+
+];
+
+let bannerIndex = 0;
+
+setInterval(function(){
+
+bannerIndex++;
+
+if(bannerIndex >= banners.length){
+bannerIndex = 0;
+}
+
+document.getElementById("banner").src =
+banners[bannerIndex];
+
+}, 8000);
+
+</script>
+
 </body>
 </html>
