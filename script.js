@@ -3,7 +3,7 @@ const products = [
 {
 name:"Zoom Wailk",
 price:899,
-category:"shoe",
+category:"shoe2",
 images:[
 "imgjuta/1.jpg.jpeg",
 "imgjuta/2.jpg.jpeg",
@@ -16,7 +16,7 @@ images:[
 {
 name:"Nike Shoe",
 price:500,
-category:"shoe",
+category:"pant7",
 images:[
 "imgjuta/10.jpg.jpeg",
 "imgjuta/11.jpg.jpeg",
@@ -28,7 +28,7 @@ images:[
 {
 name:"Style Feet ",
 price:1120,
-category:"shoe",
+category:"book6",
 images:[
 "imgjuta/4.jpg.jpeg",
 "imgjuta/9.jpg.jpeg",
@@ -39,7 +39,7 @@ images:[
 {
 name:"Premium Hoodie",
 price:1500,
-category:"shoe",
+category:"foot8",
 images:[
 "imgjuta/14.jpg.jpeg",
 "imgjuta/15.jpg.jpeg",
@@ -52,7 +52,7 @@ images:[
 {
 name:"Nike Shoe",
 price:1199,
-category:"shoe",
+category:"watch3",
 images:[
 "imgjuta/19.jpg.jpeg",
 "imgjuta/19.jpg.jpeg",
@@ -63,7 +63,7 @@ images:[
 {
 name:"Premium Hoodie",
 price:1300,
-category:"shoe",
+category:"ghori9",
 images:[
 "imgjuta/21.jpg.jpeg",
 "imgjuta/21.jpg.jpeg",
@@ -76,7 +76,7 @@ images:[
 {
 name:"Nike Shoe",
 price:800,
-category:"shoe",
+category:"fashion1",
 images:[
 "imgjuta/22.jpg.jpeg",
 "imgjuta/22.jpg.jpeg",
@@ -88,7 +88,7 @@ images:[
 {
 name:"Premium Hoodie",
 price:1500,
-category:"shoe",
+category:"phone5",
 images:[
 "imgjuta/23.jpg.jpeg",
 "imgjuta/23.jpg.jpeg",
@@ -101,7 +101,7 @@ images:[
 {
 name:"Nike Shoe",
 price:2500,
-category:"shoe",
+category:"bag4",
 images:[
 "imgjuta/24.jpg.jpeg",
 "imgjuta/24.jpg.jpeg",
@@ -126,7 +126,7 @@ images:[
 {
 name:"Nike Shoe",
 price:2500,
-category:"shoe",
+category:"watch",
 images:[
 "imgjuta/26.jpg.jpeg",
 "imgjuta/26.jpg.jpeg",
@@ -137,7 +137,7 @@ images:[
 {
 name:"Premium Hoodie",
 price:1500,
-category:"shoe",
+category:"phone",
 images:[
 "imgjuta/27.jpg.jpeg",
 "imgjuta/27.jpg.jpeg",
@@ -149,7 +149,7 @@ images:[
 {
 name:"Nike Shoe",
 price:2500,
-category:"shoe",
+category:"book",
 images:[
 "imgjuta/28.jpg.jpeg",
 "imgjuta/28.jpg.jpeg",
@@ -160,7 +160,7 @@ images:[
 {
 name:"Premium Hoodie",
 price:1500,
-category:"shoe",
+category:"fooot",
 images:[
 "imgjuta/29.jpg.jpeg",
 "imgjuta/29.jpg.jpeg",
@@ -172,7 +172,7 @@ images:[
 {
 name:"Nike Shoe",
 price:500,
-category:"shoe",
+category:"fashion1",
 images:[
 "imgjuta/30.jpg.jpeg",
 "imgjuta/30.jpg.jpeg",
@@ -183,7 +183,7 @@ images:[
 {
 name:"Premium Hoodie",
 price:999,
-category:"shoe",
+category:"bag",
 images:[
 "imgjuta/31.jpg.jpeg",
 "imgjuta/31.jpg.jpeg",
@@ -195,7 +195,7 @@ images:[
 {
 name:"Nike Shoe",
 price:1099,
-category:"shoe",
+category:"pant",
 images:[
 "imgjuta/32.jpg.jpeg",
 "imgjuta/32.jpg.jpeg",
@@ -219,7 +219,7 @@ images:[
 {
 name:"Nike Shoe",
 price:2500,
-category:"shoe",
+category:"foot",
 images:[
 "imgjuta/34.jpg.jpeg",
 "imgjuta/34.jpg.jpeg",
@@ -707,53 +707,68 @@ document.getElementById("popup").style.display = "none";
 
 }
 
-function addToCart(name,price){
+function addToCart(name, price, id){
 
-cart.push({name,price});
+let existing = cart.find(item => item.id === id);
+
+if(existing){
+
+existing.qty += 1;
+
+}else{
+
+cart.push({
+id: id,
+name: name,
+price: price,
+qty: 1
+});
+
+}
+
+// ❌ SMS/alert শুধু FIRST time add হলে যাবে
+if(!existing){
+alert(name + " Added To Cart");
+}
 
 updateCart();
-
-alert(name + " Added To Cart");
 
 }
 
 function updateCart(){
 
+let cartItems = document.getElementById("cartItems");
+cartItems.innerHTML = "";
+
 let total = 0;
 
-let html = "";
+cart.forEach(item => {
 
-cart.forEach((item)=>{
+total += item.price * item.qty;
 
-total += item.price;
+cartItems.innerHTML += `
+<div class="cart-item">
 
-html += `
+<div>
+${item.name}<br>
+৳${item.price} × ${item.qty}
+</div>
 
-<div style="
-background:#f5f5f5;
-padding:10px;
-margin-bottom:10px;
-border-radius:10px;
-">
+<div>
 
-${item.name} - ৳${item.price}
+<button onclick="removeItem(${item.id})">
+❌
+</button>
 
 </div>
 
+</div>
 `;
 
 });
 
-html += `
-<hr><br>
-<h3>Total: ৳${total}</h3>
-`;
-
-document.getElementById("cartItems").innerHTML =
-html;
-
-document.getElementById("cartCount").innerText =
-cart.length;
+document.getElementById("total").innerText = total;
+document.getElementById("cartCount").innerText = cart.length;
 
 }
 
@@ -919,3 +934,100 @@ document.getElementById("banner").src =
 banners[bannerIndex];
 
 }, 8000);
+
+
+
+
+// feee
+
+
+
+
+function cartCheckout(){
+
+let name =
+document.getElementById("cname").value;
+
+let phone =
+document.getElementById("cphone").value;
+
+let gmail =
+document.getElementById("cgmail").value;
+
+let division =
+document.getElementById("cdivision").value;
+
+let district =
+document.getElementById("cdistrict").value;
+
+let thana =
+document.getElementById("cthana").value;
+
+let village =
+document.getElementById("cvillage").value;
+
+let size =
+document.getElementById("csize").value;
+
+let color =
+document.getElementById("ccolor").value;
+
+let total =
+document.getElementById("total").innerText;
+
+let products = "";
+
+cart.forEach(item=>{
+
+products += item.name + " - ৳"
++ item.price + "%0A";
+
+});
+
+let msg = `🛒 NEW ORDER
+
+👤 Name: ${name}
+
+📞 Phone: ${phone}
+
+📧 Gmail: ${gmail}
+
+🛍️ Products:
+${products}
+
+💰 Total: ৳${total}
+
+🏛️ Division: ${division}
+
+🏙️ District: ${district}
+
+📌 Thana: ${thana}
+
+🏡 Village: ${village}
+
+📏 Size: ${size}
+
+🎨 Color: ${color}
+
+✅ Order Confirmed`;
+
+window.open(
+"https://wa.me/8801605019908?text="
++ encodeURIComponent(msg)
+);
+
+}
+function closeCart(){
+document.getElementById("cart").style.transform="translateX(100%)";
+}
+function closeCart(){
+document.getElementById("cart").classList.remove("active");
+}
+
+function removeItem(id){
+
+cart = cart.filter(item => item.id !== id);
+
+updateCart();
+
+}

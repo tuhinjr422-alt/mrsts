@@ -94,34 +94,44 @@ font-weight:bold;
   min-width:100%;
 }
 
+
+.navbarr{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+padding:10px;
+flex-wrap:nowrap;
+}
+
 .logo{
-font-size:28px;
-font-weight:700;
-color:#ff6600;
+font-size:25px;
+font-weight:bold;
+white-space:nowrap;
+color: #f53d05;
 }
 
 .search{
-width:50%;
 display:flex;
-background:#f5f5f5;
-border-radius:40px;
-overflow:hidden;
+align-items:center;
+gap:5px;
+flex:1;
+max-width:400px;
 }
 
 .search input{
-flex:1;
-padding:14px;
-border:none;
-outline:none;
-background:none;
+width:100%;
+padding:8px;
+border:1px solid #ddd;
+border-radius:6px;
 }
 
 .search button{
-padding:14px 20px;
+padding:10px 10px;
 border:none;
-background:#ff6600;
+background:#b1d412;
 color:#fff;
-font-size:18px;
+font-size:20px;
 cursor:pointer;
 }
 
@@ -131,9 +141,11 @@ gap:20px;
 font-size:25px;
 }
 
-.icons div{
-cursor:pointer;
-position:relative;
+.icons{
+display:flex;
+align-items:center;
+gap:15px;
+white-space:nowrap;
 }
 
 #cartCount{
@@ -485,7 +497,7 @@ margin-bottom:18px;
 .order-box textarea{
 width:100%;
 padding:16px;
-border:1px solid #a14040;
+border:1px solid #bba0a0;
 border-radius:12px;
 margin-bottom:14px;
 font-size:16px;
@@ -518,7 +530,7 @@ top:0;
 right:-100%;
 width:350px;
 height:100%;
-background:#9b2222;
+background:#54abbb;
 z-index:999999;
 padding:20px;
 transition:.4s;
@@ -627,11 +639,56 @@ cursor:pointer;
 .bottom {
   text-align: center;
   margin-top: 30px;
-  font-size: 20px;
-  color: #685f5f;
+  font-size: 22px;
+  color: #f8f6f6;
   border-top: 1px solid #333;
   padding-top: 15px;
+  background: #401850;
 }
+/* feee */
+.cart input,
+.cart select{
+
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:10px;
+border:1px solid #ddd;
+
+}
+
+.cart h3{
+
+margin-top:15px;
+
+}
+.close-cart{
+position:absolute;
+right:15px;
+top:10px;
+font-size:22px;
+cursor:pointer;
+color:red;
+font-weight:bold;
+}
+.cart-item button{
+background:red;
+color:white;
+border:none;
+padding:5px 10px;
+border-radius:5px;
+cursor:pointer;
+font-size:14px;
+}
+
+
+
+
+
+
+
+
+
 
 
 /* ===== MOBILE ===== */

@@ -24,7 +24,7 @@
 <!-- Simple Slider (No CSS needed extra) -->
 
 
-<div class="navbar">
+<div class="navbarr">
 
 <div class="logo">MRST Fashion</div>
 
@@ -73,20 +73,20 @@ src="img/cover3.jpg">
 <div class="cat" onclick="filterProducts('shoe',event)">👟 Shoes</div>
 <div class="cat" onclick="filterProducts('watch',event)">⌚ Watch</div>
 <div class="cat" onclick="filterProducts('bag',event)">👜 Bag</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 phone</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 book</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 pant</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 foot</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 ghori</div>
-<div class="cat" onclick="filterProducts('fashion',event)">👕 Fashion</div>
-<div class="cat" onclick="filterProducts('shoe',event)">👟 Shoes</div>
-<div class="cat" onclick="filterProducts('watch',event)">⌚ Watch</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 Bag</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 phone</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 book</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 pant</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 foot</div>
-<div class="cat" onclick="filterProducts('bag',event)">👜 ghori</div>
+<div class="cat" onclick="filterProducts('phone',event)">👜 phone</div>
+<div class="cat" onclick="filterProducts('book',event)">👜 book</div>
+<div class="cat" onclick="filterProducts('pant',event)">👜 pant</div>
+<div class="cat" onclick="filterProducts('foot',event)">👜 foot</div>
+<div class="cat" onclick="filterProducts('ghori',event)">👜 ghori</div>
+<div class="cat" onclick="filterProducts('fashion1',event)">👕 Fashion 1</div>
+<div class="cat" onclick="filterProducts('shoe2',event)">👟 Shoes 2</div>
+<div class="cat" onclick="filterProducts('watch3',event)">⌚ Watch 3</div>
+<div class="cat" onclick="filterProducts('bag4',event)">👜 Bag 4</div>
+<div class="cat" onclick="filterProducts('phone5',event)">👜 phone 5</div>
+<div class="cat" onclick="filterProducts('book6',event)">👜 book 6</div>
+<div class="cat" onclick="filterProducts('pant7',event)">👜 pant 7</div>
+<div class="cat" onclick="filterProducts('foot8',event)">👜 foot 8</div>
+<div class="cat" onclick="filterProducts('ghori9',event)">👜 ghori 9</div>
 
 
 </div>
@@ -897,12 +897,65 @@ onclick="sendOrder()">
 <!-- ===== CART ===== -->
 
 <div class="cart" id="cart">
+  <span class="close-cart" onclick="closeCart()">✖</span>
+  
 
 <h2>My Cart</h2>
 
 <br>
 
 <div id="cartItems"></div>
+
+<!-- TOTAL -->
+
+<h3>
+Total: ৳<span id="total">0</span>
+</h3>
+
+<br>
+
+<!-- FORM -->
+
+<input type="text" id="cname"
+placeholder="Your Name">
+
+<input type="text" id="cphone"
+placeholder="Phone Number">
+
+<input type="email" id="cgmail"
+placeholder="Gmail Address">
+
+<input type="text" id="cdivision"
+placeholder="Division">
+
+<input type="text" id="cdistrict"
+placeholder="District">
+
+<input type="text" id="cthana"
+placeholder="Thana">
+
+<input type="text" id="cvillage"
+placeholder="Village">
+
+<select id="csize">
+<option>S</option>
+<option>M</option>
+<option>L</option>
+<option>XL</option>
+</select>
+
+<select id="ccolor">
+<option>Black</option>
+<option>White</option>
+<option>Blue</option>
+</select>
+
+<button class="order-btn"
+onclick="cartCheckout()">
+
+💬 Checkout WhatsApp
+
+</button>
 
 </div>
 
@@ -954,7 +1007,7 @@ class="whatsapp">
   </div>
 
   <div class="bottom">
-    © 2026 TUHIN MAHAMUD | All Rights Reserved
+    © 2026 TUHIN MAHAMUD | All Rights To this website are  Reserved
   </div>
 
 </footer>
